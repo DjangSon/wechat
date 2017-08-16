@@ -1,5 +1,5 @@
 from django.conf.urls import url
-
+from web import views
 urlpatterns = [
-    # url(r'^page/(\d+)', views.secondhands),
+    url(r'^$', views.index),
 ]
