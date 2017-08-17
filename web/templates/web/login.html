@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>后台登录</title>
+    <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}">
+    <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
+    <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
+</head>
+<body class="gray-bg">
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div>
+                <h1 class="logo-name">We</h1>
+            </div>
+            <h3>We</h3>
+            <form>
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" id="user_name" placeholder="用户名" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" placeholder="密码" required="">
+                </div>
+                <button type="button" class="btn btn-primary block full-width m-b" id="login">登 录</button>
+            </form>
+        </div>
+    </div>
+    <!-- 全局js -->
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/plugins/layer/layer.min.js' %}"></script>
+    <script src="{% static 'web/js/init.js' %}"></script>
+</body>
+<script>
+$(function () {
+    $('#login').on('click', function () {
+        $.ajax({
+            url: '/web/login/',
+            type: 'POST',
+            data: {'user_name': $('#user_name').val(), 'password': $('#password').val()},
+            headers:{ "X-CSRFtoken":getCookie("csrftoken")},
+            success: function (r) {
+                if (r.error == 1) {
+                } else {
+                }
+            }
+        });
+    });
+});
+</script>
+</html>
