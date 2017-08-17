@@ -60,6 +60,7 @@ a:focus {
     /*white-space: nowrap;*/
 }
 
+
 .nav.navbar-right > li > a {
     color: #999c9e;
 }
@@ -4140,6 +4141,7 @@ table.table-mail tr td {
 
 .gray-bg {
     background-color: #f3f3f4;
+    background: url("../img/bg.jpg");
 }
 
 .white-bg {
@@ -4794,6 +4796,13 @@ body.modal-open {
     padding-top: 40px;
 }
 
+.vertical-center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .lockscreen.middle-box {
     width: 200px;
     padding-top: 110px;
@@ -4821,6 +4830,17 @@ body.modal-open {
     font-weight: 800;
     letter-spacing: -10px;
     margin-bottom: 0px;
+    -webkit-user-select: none;
+}
+
+.breath {
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    opacity: 0.5;
+    -webkit-animation-name: breath;
+    -webkit-animation-duration: 8s;
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: infinite;
 }
 
 .middle-box h1 {

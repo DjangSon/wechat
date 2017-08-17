@@ -13,12 +13,12 @@
     <script>if(window.top !== window.self){ window.top.location = window.location;}</script>
 </head>
 <body class="gray-bg">
-    <div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div class="middle-box text-center loginscreen fadeInDown vertical-center">
         <div>
             <div>
-                <h1 class="logo-name">We</h1>
+                <img src="{% static 'web/img/we.png' %}" class="logo-name breath">
             </div>
-            <h3>We</h3>
+            <br>
             <form>
                 {% csrf_token %}
                 <div class="form-group">
@@ -47,7 +47,12 @@ $(function () {
             headers:{ "X-CSRFtoken":getCookie("csrftoken")},
             success: function (r) {
                 if (r.error == 1) {
+                    layer.msg(r.msg);
                 } else {
+                    layer.msg(r.msg);
+                    setTimeout(function(){
+                        top.location.replace(window.location.href);
+                    },2000);
                 }
             }
         });

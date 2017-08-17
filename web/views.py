@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http.response import JsonResponse
 
 # Create your views here.
@@ -13,5 +13,11 @@ def index(request):
 
 def login(request):
     request.session['web'] = '1'
-    return JsonResponse({'error': 1, 'msg': '登陆成功'})
-    # return redirect('web/index.html')
+    return JsonResponse({'error': 0, 'msg': '登陆成功'})
+
+
+def logout(request):
+    try:
+        del request.session['web']
+    finally:
+        return redirect('/web')
