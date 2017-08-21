@@ -13,3 +13,22 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+function getData(table, objTable){
+    $(table).on('click','tr',function(){
+        if ($(this).hasClass('selected')){
+            tempData = objTable.row(this).data();
+            // console.log(tempData);
+        } else {
+            tempData = undefined;
+        }
+    });
+}
+
+//提示选中数据
+function tipsSel(){
+    layer.alert('请选择数据', {
+        skin: 'layui-layer-lan',
+        closeBtn: 0
+    });
+}

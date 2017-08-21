@@ -1,0 +1,185 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+{% block css %}
+    <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
+{% endblock %}
+{% block js %}
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
+    <script src="{% static 'web/js/plugins/dataTables/jquery.dataTables.js'%}"></script>
+    <script src="{% static 'web/js/plugins/layer/layer.min.js' %}"></script>
+    <script src="{% static 'web/js/contabs.js' %}"></script>
+    <script src="{% static 'web/js/init.js' %}"></script>
+{% endblock %}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <h2>{% block h2 %}h2{% endblock %}</h2>
+                    <div class="breadcrumb clearfix">
+                        {% block function %}
+                            <a class="btn btn-success" href="javascript:0;" id="X-add"><i class="fa fa-plus-square"></i>&nbsp;添加公众号</a>&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success" href="javascript:0;" id="X-detail"><i class="fa fa-pencil-square"></i>&nbsp;查看详情</a>&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-warning" href="javascript:0;" id="X-stop"><i class="fa fa-ban"></i>&nbsp;停用</a>&nbsp;&nbsp;&nbsp;
+                        {% endblock %}
+                        <a class="btn btn-success btn-refresh pull-right" href="javascript:location.replace(location.href);" title="刷新" ><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <br>
+                    {% block search %}
+                        <div class="input-group">
+                        <span class="input-group-btn">
+                              <button type="button" class="btn btn btn-primary"> <i class="fa fa-search"></i> 搜索</button>
+                        </span>
+                    </div>
+                    {% endblock %}
+                    <div class="clients-list">
+                        <div class="tab-content">
+                            <div id="tab-1" class="tab-pane active">
+                                <div class="full-height-scroll">
+                                    <div class="table-responsive">
+                                        <table id="dTable" class="table table-striped table-hover table-bordered">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                {% block th %}
+                                                    <th>hr咨询标题</th>
+                                                    <th>hr咨询简介</th>
+                                                    <th>添加人</th>
+                                                    <th>添加时间</th>
+                                                    <th>修改人</th>
+                                                    <th>修改时间</th>
+                                                {% endblock %}
+                                            </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block script_function %}
+<script>
+var rows = 15;
+$(function () {
+	var dTable = $('#dTable').DataTable({
+		sort: false,                    //关闭排序
+		filter: false,                  //关闭搜索框
+		lengthChange: false,            //关闭显示数量下拉框
+		language: {
+			paginate: {                 //分页按钮文本
+				first: '第一页',
+				previous: '上一页',
+				next: '下一页',
+				last: '最后一页'
+			},
+			info: '显示 _START_ 到 _END_ , 共 _TOTAL_ 条',
+			infoEmpty: '显示 0 到 0 , 共 0 条',             //左下角文本
+			emptyTable: '没有数据存在',   //无数据时文本
+			zeroRecords: '没有搜索到相关数据',   //未搜索到结果文本
+			processing: '正在加载中...'
+		},
+		serverSide: true,               //开启服务器模式
+		processing: true,               //加载文本
+		ajax: {
+			//指定数据源
+			url: 'web/wechat_list',
+			type: 'POST',
+			data: {
+				filter:{
+					date_added: {
+						start: $('#dateStart').val(),
+						end: $('#dateEnd').val()
+					}
+				}
+			}
+		},
+		pageLength: rows, //每页显示几条数据
+		columns:[
+			{data: null,class:"t-center"},
+			{data: "article_title",class:"t-center"},
+			{data: "article_sketch",class:"t-center"},
+			{data: "by_added",class:"t-center"},
+			{data: "date_added",class:"t-center"},
+			{data: "by_modified",class:"t-center"},
+			{data: "date_modified",class:"t-center"}
+		],
+		columnDefs: [
+{#			{#}
+{#				targets: 9,#}
+{#				data: "status",#}
+{#				render: function(data, type, row){#}
+{#					if (data == '0'){#}
+{#						return '<font color="red">未认证</font>';#}
+{#    				} else if (data == '1'){#}
+{#					    return '<font color="blue">待审核</font>';#}
+{#					} else if (data == '2'){#}
+{#						return '<font color="green">已认证</font>';#}
+{#					}#}
+{#				}#}
+{#			}#}
+		]
+	});
+	//添加行号
+	dTable.on('draw.dt', function(){
+		dTable.column(0).nodes().each(function(ele,index){
+			ele.innerHTML = index + 1;
+		});
+		tempData = undefined;
+	});
+	getData('#dTable tbody', dTable);//init.js中 值在tempData中
+
+    //发布资讯
+    $("#X-add").on('click', function () {
+        //采用layer的iframe窗
+        layer.open({
+            type: 2,
+            title: '添加HR资讯。',
+            shadeClose: true,
+            shade: false,
+            maxmin: false, //开启最大化最小化按钮
+            area: ['100%', '100%'],
+            content: 'sales/article/release',
+            end: function () {
+                var dTable = $('#dTable').DataTable();
+                dTable.page(dTable.page()).draw(false);
+            }
+        });
+    });
+    //查看资讯详情
+    $('#X-detail').on('click', function () {
+        if (tempData == undefined){
+            tipsSel();
+        } else {
+            layer.open({
+                type: 2,
+                title: '查看HR资讯详情。',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                area: ['100%', '100%'],
+                content: 'sales/article/articleDetail?article_id=' + tempData['article_id']
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
+</body>
+</html>
