@@ -3,6 +3,8 @@ from django.http.response import JsonResponse
 from django.contrib.auth.hashers import check_password
 from web.models import Users
 from web.models import Subscription
+from django.core.paginator import Paginator
+from math import ceil
 # Create your views here.
 
 
@@ -15,17 +17,22 @@ def index(request):
 
 def subscription(request):
     if request.session. has_key('username') is False:
-        return render(request, 'web/login.html')
+        return redirect('/web')
     return render(request, 'web/subscription.html')
 
 
 def wechat_list(request):
+    wechats = Subscription.objects.all()
+    count = wechats.count()
+    paginator = Paginator(wechats, 15)
+    data = {}
     try:
-        wechats = Subscription.objects.all()
-
-        return JsonResponse(wechat_list)
+        temp = paginator.page(ceil(request.POST['start']/15) + 1)
     except:
-        return JsonResponse()
+        temp = paginator.page(1)
+    for val in temp:
+        data[val['id']] = val
+    return JsonResponse({'draw': request.POST['draw'], 'recordsTotal': count, 'recordsFiltered': count, 'data': data})
 
 
 def login(request):

@@ -34,5 +34,6 @@ class Subscription(models.Model):
     access_token = models.CharField(max_length=128)
     last_date = models.DateTimeField()
     type = TinyIntField()
+    status = TinyIntField()
     group_id = TinyIntField()
     date_added = models.DateTimeField()

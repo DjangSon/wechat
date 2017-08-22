@@ -1,3 +1,124 @@
 {% extends 'web/base.html' %}
 {% load staticfiles %}
 {% block title %}微信公众号{% endblock %}
+{% block h2 %}公众号管理{% endblock %}
+{% block function %}
+    <a class="btn btn-success" href="javascript:0;" id="X-add"><i class="fa fa-plus-square"></i>&nbsp;添加公众号</a>&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-success" href="javascript:0;" id="X-detail"><i class="fa fa-pencil-square"></i>&nbsp;查看详情</a>&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-warning" href="javascript:0;" id="X-stop"><i class="fa fa-ban"></i>&nbsp;停用</a>&nbsp;&nbsp;&nbsp;
+{% endblock %}
+{% block search %}
+{% endblock %}
+{% block th %}
+<th>公众号图片</th>
+<th>名称</th>
+<th>类型</th>
+<th>账号</th>
+<th>原始ID</th>
+<th>添加时间</th>
+{% endblock %}
+{% block script_function %}
+<script>
+var rows = 15;
+$(function () {
+	var dTable = $('#dTable').DataTable({
+		sort: false,                    //关闭排序
+		filter: false,                  //关闭搜索框
+		lengthChange: false,            //关闭显示数量下拉框
+		language: {
+			paginate: {                 //分页按钮文本
+				first: '第一页',
+				previous: '上一页',
+				next: '下一页',
+				last: '最后一页'
+			},
+			info: '显示 _START_ 到 _END_ , 共 _TOTAL_ 条',
+			infoEmpty: '显示 0 到 0 , 共 0 条',             //左下角文本
+			emptyTable: '没有数据存在',   //无数据时文本
+			zeroRecords: '没有搜索到相关数据',   //未搜索到结果文本
+			processing: '正在加载中...'
+		},
+		serverSide: true,               //开启服务器模式
+		processing: true,               //加载文本
+		ajax: {
+			//指定数据源
+			url: '/web/wechat_list/',
+            headers:{ "X-CSRFtoken":getCookie("csrftoken")},
+			type: 'POST',
+			data: {
+				filter:{
+					date_added: {
+						start: $('#dateStart').val(),
+						end: $('#dateEnd').val()
+					}
+				}
+			}
+		},
+		pageLength: rows, //每页显示几条数据
+		columns:[
+			{data: null,class:"t-center"},
+			{data: "head_img",class:"t-center"},
+			{data: "name",class:"t-center"},
+			{data: "type",class:"t-center"},
+			{data: "account",class:"t-center"},
+			{data: "origin_id",class:"t-center"},
+			{data: "date_added",class:"t-center"}
+		],
+		columnDefs: [
+			{
+				targets: 1,
+				data: "head_img",
+				render: function(data, type, row){
+                    return '<img src="'+ data +'">';
+				}
+			}
+		]
+	});
+	//添加行号
+	dTable.on('draw.dt', function(){
+		dTable.column(0).nodes().each(function(ele,index){
+			ele.innerHTML = index + 1;
+		});
+		tempData = undefined;
+	});
+	getData('#dTable tbody', dTable);//init.js中 值在tempData中
+
+    //发布资讯
+    $("#X-add").on('click', function () {
+        var html = '';
+        html += '<div ><h1>12321312</h1></div>';
+        console.log(html);
+        //采用layer的iframe窗
+        layer.open({
+            type: 2,
+            title: '添加公众号。',
+            shadeClose: true,
+            shade: false,
+            maxmin: false, //开启最大化最小化按钮
+            area: ['100%', '100%'],
+            content: html,
+            end: function () {
+                var dTable = $('#dTable').DataTable();
+                dTable.page(dTable.page()).draw(false);
+            }
+        });
+    });
+    //查看资讯详情
+    $('#X-detail').on('click', function () {
+        if (tempData == undefined){
+            tipsSel();
+        } else {
+            layer.open({
+                type: 2,
+                title: '查看HR资讯详情。',
+                shadeClose: true,
+                shade: false,
+                maxmin: false, //开启最大化最小化按钮
+                area: ['100%', '100%'],
+                content: 'sales/article/articleDetail?article_id=' + tempData['article_id']
+            });
+        }
+    });
+});
+</script>
+{% endblock %}
