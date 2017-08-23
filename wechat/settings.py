@@ -127,3 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'web/static')
+
+# Qiniu AppKEy SecretKey
+Qiniu_App_Key = 'Rx7yzL7XDjl7ZZXKH9i2upBCsHguPfpGH8nX34L7'
+Qiniu_Secret_Key = 'ALElClNFV5s9WkV7HHBcdsLp32ktBw1JUQraAPpR'
