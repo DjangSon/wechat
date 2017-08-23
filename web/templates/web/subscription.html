@@ -17,6 +17,90 @@
 <th>原始ID</th>
 <th>添加时间</th>
 {% endblock %}
+{% block modal %}
+<div id="X-modal" type="modal">
+    <br>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">公众号名称：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="64" class="form-control" id="name" placeholder="" value="">
+            </div>
+            <label class="col-md-1 control-label">公众号账号：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="64" class="form-control" id="account" placeholder="" value="">
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">公众号简介：</label>
+            <div class="col-md-11">
+                <input type="text" maxlength="64" class="form-control" id="describe" placeholder="" value="">
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">原始ID：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="64" class="form-control" id="orgin_id" placeholder="" value="">
+            </div>
+            <label class="col-md-1 control-label">公众号类型：</label>
+            <div class="col-md-5">
+                <select class="form-control" id="type">
+                    <option value="0">普通订阅号</option>
+                    <option value="1">普通服务号</option>
+                    <option value="2">认证订阅号</option>
+                    <option value="3">认证服务号/认证媒体/政府订阅号</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">Appid：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="32" class="form-control" id="app_id" placeholder="" value="">
+            </div>
+            <label class="col-md-1 control-label">AppSecret：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="64" class="form-control" id="app_secret" placeholder="" value="">
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">头像：</label>
+            <div class="col-md-5">
+                <input type="file" class="form-control" id="head_img" value="">
+            </div>
+            <label class="col-md-1 control-label">二维码：</label>
+            <div class="col-md-5">
+                <input type="file" class="form-control" id="qrcode_img" value="">
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+    <div class="form-horizontal">
+        <div class="col-md-12 form-group">
+            <label class="col-md-1 control-label">Token：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="32" class="form-control" id="token" placeholder="" value="">
+            </div>
+            <label class="col-md-1 control-label">EncodingAESKey：</label>
+            <div class="col-md-5">
+                <input type="text" maxlength="64" class="form-control" id="encodingaeskey" placeholder="" value="">
+            </div>
+        </div>
+    </div>
+    <br/><br/><br/>
+</div>
+{% endblock %}
 {% block script_function %}
 <style>
     .layui-layer-page {
@@ -91,135 +175,51 @@ $(function () {
 
     //发布资讯
     $("#X-add").on('click', function () {
-        var html = '';
-        html += '<div> \
-        <br> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">公众号名称：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="64" class="form-control" id="name" placeholder="" value=""> \
-                </div> \
-                <label class="col-md-1 control-label">公众号账号：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="64" class="form-control" id="account" placeholder="" value=""> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">公众号简介：</label> \
-                <div class="col-md-11"> \
-                    <input type="textarea" maxlength="64" class="form-control" id="describe" placeholder="" value=""> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">原始ID：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="64" class="form-control" id="orgin_id" placeholder="" value=""> \
-                </div> \
-                <label class="col-md-1 control-label">公众号类型：</label> \
-                <div class="col-md-5"> \
-                    <select class="form-control" id="type"> \
-                        <option value="0">普通订阅号</option> \
-                        <option value="1">普通服务号</option> \
-                        <option value="2">认证订阅号</option> \
-                        <option value="3">认证服务号/认证媒体/政府订阅号</option> \
-                    </select> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">Appid：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="32" class="form-control" id="app_id" placeholder="" value=""> \
-                </div> \
-                <label class="col-md-1 control-label">AppSecret：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="64" class="form-control" id="app_secret" placeholder="" value=""> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">头像：</label> \
-                <div class="col-md-5"> \
-                    <input type="file" id="head_img" name="head_img"> \
-                </div> \
-                <label class="col-md-1 control-label">二维码：</label> \
-                <div class="col-md-5"> \
-                    <input type="file" id="qrcode_img" name="qrcode_img"> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        <div class="form-horizontal"> \
-            <div class="col-md-12 form-group"> \
-                <label class="col-md-1 control-label">Token：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="32" class="form-control" id="token" placeholder="" value=""> \
-                </div> \
-                <label class="col-md-1 control-label">EncodingAESKey：</label> \
-                <div class="col-md-5"> \
-                    <input type="text" maxlength="64" class="form-control" id="encodingaeskey" placeholder="" value=""> \
-                </div> \
-            </div> \
-        </div> \
-        <br/><br/><br/> \
-        </div>';
-        //采用layer的iframe窗
         layer.open({
             type: 1,
             title: '添加公众号。',
             shadeClose: true,
             shade: false,
             maxmin: false, //开启最大化最小化按钮
-            area: ['100%', '88%'],
-            content: html,
+            area: ['100%', '90.5%'],
+            content: $('#X-modal').html(),
             btn: ['保存', '取消'],
 			yes: function () {
                 var head = '';
                 var qrcode = '';
-                $('#head_img').localResizeIMG({
-                    success: function (result) {
-                        head = result.base64;
-                    }
-                });
-                $('#qrcode_img').localResizeIMG({
-                    success: function (result) {
-                        qrcode = result.base64;
-                    }
-                });
-				layer.confirm('您确认想要保存吗？', {btn: ['确定', '取消']}, function () {
-				    console.log('ssssssssss')
-					$.ajax({
-					    url: '/web/add_wechat',
-                        type: 'POST',
-                        headers:{ "X-CSRFtoken":getCookie("csrftoken")},
-                        data: {
-					        name: $('#name').val(), account: $('#account').val(), describe: $('#describe').val(),
-                            origin_id: $('#origin_id').val(), type: $('#type').val(), app_id: $('#app_id').val(),
-                            app_secret: $('#app_secret').val(), token: $('#token').val(), head_img: head,
-                            qrcode_img: qrcode, encodingaeskey: $('#encodingaeskey').val()
-					    },
-                        success: function (result) {
-					        if (result.error) {
-					            layer.msg(result.msg);
-                            } else {
-					            layer.msg(result.msg);
-					            layer.close();
-                            }
-
-                        }
-                    });
-				});
+                console.log($('#head_img'));
+{#                $('#head_img').localResizeIMG({#}
+{#                    success: function (result) {#}
+{#                        head = result.base64;#}
+{#                    }#}
+{#                });#}
+{#                $('#qrcode_img').localResizeIMG({#}
+{#                    success: function (result) {#}
+{#                        qrcode = result.base64;#}
+{#                    }#}
+{#                });#}
+{#				layer.confirm('您确认想要保存吗？', {btn: ['确定', '取消']}, function () {#}
+{#					$.ajax({#}
+{#					    url: '/web/add_wechat',#}
+{#                        type: 'POST',#}
+{#                        headers:{ "X-CSRFtoken":getCookie("csrftoken")},#}
+{#                        data: {#}
+{#					        name: $('#name').val(), account: $('#account').val(), describe: $('#describe').val(),#}
+{#                            origin_id: $('#origin_id').val(), type: $('#type').val(), app_id: $('#app_id').val(),#}
+{#                            app_secret: $('#app_secret').val(), token: $('#token').val(), head_img: head,#}
+{#                            qrcode_img: qrcode, encodingaeskey: $('#encodingaeskey').val()#}
+{#					    },#}
+{#                        success: function (result) {#}
+{#					        if (result.error) {#}
+{#					            layer.msg(result.msg);#}
+{#                            } else {#}
+{#					            layer.msg(result.msg);#}
+{#					            layer.close();#}
+{#                            }#}
+{##}
+{#                        }#}
+{#                    });#}
+{#				});#}
 			},
 			no: function () {
 			},

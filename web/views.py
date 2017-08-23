@@ -5,6 +5,8 @@ from web.models import Users
 from web.models import Subscription
 from django.core.paginator import Paginator
 from math import ceil
+from time import time
+from tool.models import upload
 # Create your views here.
 
 
@@ -37,6 +39,9 @@ def wechat_list(request):
 
 def add_wechat(request):
     try:
+        head_img = time()
+        return JsonResponse({'data': request.POST['head_img']})
+        # if upload('we-picture', '')
         wechat = Subscription(
             name=request.POST['name'], describe=request.POST['describe'], account=request.POST['account'],
             origin_id=request.POST['origin_id'], app_id=request.POST['app_id'], app_secret=request.POST['app_secret'],
