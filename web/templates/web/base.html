@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-{% block css %}
     <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
+{% block css %}
 {% endblock %}
 {% block js %}
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
@@ -20,7 +20,7 @@
     <script src="{% static 'web/js/init.js' %}"></script>
 {% endblock %}
 </head>
-<body class="gray-bg">
+<body class="gray-bg" style="overflow: hidden">
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">

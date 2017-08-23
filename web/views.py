@@ -35,6 +35,18 @@ def wechat_list(request):
     return JsonResponse({'draw': request.POST['draw'], 'recordsTotal': count, 'recordsFiltered': count, 'data': data})
 
 
+def add_wechat(request):
+    try:
+        wechat = Subscription(
+            name=request.POST['name'], describe=request.POST['describe'], account=request.POST['account'],
+            origin_id=request.POST['origin_id'], app_id=request.POST['app_id'], app_secret=request.POST['app_secret'],
+            token=request.POST['token'], encodingaeskey=request.POST['encodingaeskey'], type=request.POST['type'],
+        )
+        return JsonResponse({'error': 0, 'msg': '添加成功'})
+    except:
+        return JsonResponse({'error': 1, 'msg': '参数异常'})
+
+
 def login(request):
     try:
         username = request.POST['username']
