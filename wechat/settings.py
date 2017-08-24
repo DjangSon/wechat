@@ -131,3 +131,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'web/static')
 # Qiniu AppKEy SecretKey
 Qiniu_App_Key = 'Rx7yzL7XDjl7ZZXKH9i2upBCsHguPfpGH8nX34L7'
 Qiniu_Secret_Key = 'ALElClNFV5s9WkV7HHBcdsLp32ktBw1JUQraAPpR'
+
+# WeChat AppId AppSecret
+WeChat_AppId = 'wx81d2b48a8568f1ad'
+WeChat_AppSecret = '8c74cb2c564fc8fcf37467bcf83435a1'

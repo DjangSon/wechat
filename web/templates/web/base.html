@@ -8,8 +8,7 @@
     <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
-{% block css %}
-{% endblock %}
+{% block css %}{% endblock %}
 {% block js %}
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
@@ -100,6 +99,7 @@ $(function () {
 		ajax: {
 			//指定数据源
 			url: 'web/wechat_list',
+            headers:{ "X-CSRFtoken":getCookie("csrftoken")},
 			type: 'POST',
 			data: {
 				filter:{
@@ -113,12 +113,12 @@ $(function () {
 		pageLength: rows, //每页显示几条数据
 		columns:[
 			{data: null,class:"t-center"},
-			{data: "article_title",class:"t-center"},
-			{data: "article_sketch",class:"t-center"},
-			{data: "by_added",class:"t-center"},
-			{data: "date_added",class:"t-center"},
-			{data: "by_modified",class:"t-center"},
-			{data: "date_modified",class:"t-center"}
+			{data: "head_img",class:"t-center"},
+			{data: "name",class:"t-center"},
+			{data: "type",class:"t-center"},
+			{data: "account",class:"t-center"},
+			{data: "origin_id",class:"t-center"},
+			{data: "date_added",class:"t-center"}
 		],
 		columnDefs: [
 {#			{#}
