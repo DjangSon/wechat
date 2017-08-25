@@ -91,57 +91,15 @@ $(function () {
 
     //发布资讯
     $("#X-add").on('click', function () {
-{#        layer.open({#}
-{#            type: 1,#}
-{#            title: '添加公众号。',#}
-{#            shadeClose: true,#}
-{#            shade: false,#}
-{#            maxmin: false, //开启最大化最小化按钮#}
-{#            area: ['100%', '90.5%'],#}
-{#            content: html,#}
-{#            btn: ['保存', '取消'],#}
-{#			yes: function () {#}
-{#                $('#head_img').localResizeIMG({#}
-{#                    success: function (result) {#}
-{#                        head = result.base64;#}
-{#                    }#}
-{#                });#}
-{#                $('#qrcode_img').localResizeIMG({#}
-{#                    success: function (result) {#}
-{#                        qrcode = result.base64;#}
-{#                    }#}
-{#                });#}
-{#				layer.confirm('您确认想要保存吗？', {btn: ['确定', '取消']}, function () {#}
-{#					$.ajax({#}
-{#					    url: '/web/add_wechat',#}
-{#                        type: 'POST',#}
-{#                        headers:{ "X-CSRFtoken":getCookie("csrftoken")},#}
-{#                        data: {#}
-{#					        name: $('#name').val(), account: $('#account').val(), describe: $('#describe').val(),#}
-{#                            origin_id: $('#origin_id').val(), type: $('#type').val(), app_id: $('#app_id').val(),#}
-{#                            app_secret: $('#app_secret').val(), head_img: head, qrcode_img: qrcode,#}
-{#                            token: $('#token').val(), encodingaeskey: $('#encodingaeskey').val()#}
-{#					    },#}
-{#                        success: function (result) {#}
-{#					        console.log($('#name').val());#}
-{#					        if (result.error) {#}
-{#					            layer.msg(result.msg);#}
-{#                            } else {#}
-{#					            layer.msg(result.msg);#}
-{#					            layer.close();#}
-{#                            }#}
-{##}
-{#                        }#}
-{#                    });#}
-{#				});#}
-{#			},#}
-{#			no: function () {#}
-{#			},#}
-{#            end: function () {#}
-{#                var dTable = $('#dTable').DataTable();#}
-{#                dTable.page(dTable.page()).draw(false);#}
-{#            }#}
-{#        });#}
+        layer.open({
+            type: 2,
+            title: '添加公众号。',
+            shadeClose: true,
+            shade: false,
+            maxmin: false, //开启最大化最小化按钮
+            area: ['100%', '100%'],
+            content: '/web/add_page'
+        });
     });
     //查看资讯详情
     $('#X-detail').on('click', function () {

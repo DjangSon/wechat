@@ -25,6 +25,10 @@ def subscription(request):
     return render(request, 'web/wechat/subscription.html')
 
 
+def add_page(request):
+    return render(request, 'web/wechat/add_page.html')
+
+
 def wechat_list(request):
     wechats = Subscription.objects.all().values()
     count = wechats.count()
