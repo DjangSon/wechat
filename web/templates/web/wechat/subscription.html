@@ -21,12 +21,6 @@
 {% block modal %}
 {% endblock %}
 {% block script_function %}
-<style>
-    .layui-layer-page {
-        position: absolute!important;
-        top:0!important;
-    }
-</style>
 <script>
 var rows = 15;
 $(function () {
@@ -77,13 +71,13 @@ $(function () {
 			{data: "date_added",class:"t-center"}
 		],
 		columnDefs: [
-{#			{#}
-{#				targets: 1,#}
-{#				data: "head_img",#}
-{#				render: function(data, type, row){#}
-{#                    return '<img src="'+ data +'">';#}
-{#				}#}
-{#			}#}
+			{
+				targets: 1,
+				data: "head_img",
+				render: function(data, type, row){
+                    return '<img src="'+ data +'">';
+				}
+			}
 		]
 	});
 	//添加行号
@@ -97,88 +91,6 @@ $(function () {
 
     //发布资讯
     $("#X-add").on('click', function () {
-{#        var html = '<div id="X-modal" type="modal">';#}
-{#        html += '<br>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">公众号名称：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="name" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '<label class="col-md-1 control-label">公众号账号：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="account" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">公众号简介：</label>';#}
-{#        html += '<div class="col-md-11">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="describe" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">原始ID：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="origin_id" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '<label class="col-md-1 control-label">公众号类型：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<select class="form-control" id="type">';#}
-{#        html += '<option value="0">普通订阅号</option>';#}
-{#        html += '<option value="1">普通服务号</option>';#}
-{#        html += '<option value="2">认证订阅号</option>';#}
-{#        html += '<option value="3">认证服务号/认证媒体/政府订阅号</option>';#}
-{#        html += '</select>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">Appid：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="32" class="form-control" id="app_id" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '<label class="col-md-1 control-label">AppSecret：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="app_secret" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">头像：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="file" class="form-control" id="head_img" value="">';#}
-{#        html += '</div>';#}
-{#        html += '<label class="col-md-1 control-label">二维码：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="file" class="form-control" id="qrcode_img" value="">';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '<div class="form-horizontal">';#}
-{#        html += '<div class="col-md-12 form-group">';#}
-{#        html += '<label class="col-md-1 control-label">Token：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="32" class="form-control" id="token" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '<label class="col-md-1 control-label">EncodingAESKey：</label>';#}
-{#        html += '<div class="col-md-5">';#}
-{#        html += '<input type="text" maxlength="64" class="form-control" id="encodingaeskey" placeholder="" value="">';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '</div>';#}
-{#        html += '<br/><br/><br/>';#}
-{#        html += '</div><script><//script>';#}
 {#        layer.open({#}
 {#            type: 1,#}
 {#            title: '添加公众号。',#}

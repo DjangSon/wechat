@@ -22,21 +22,21 @@ def index(request):
 def subscription(request):
     if request.session. has_key('username') is False:
         return redirect('/web')
-    return render(request, 'web/subscription.html')
+    return render(request, 'web/wechat/subscription.html')
 
 
 def wechat_list(request):
     wechats = Subscription.objects.all().values()
     count = wechats.count()
     paginator = Paginator(wechats, 15)
-    data = {}
+    data = []
     i = 0
     try:
         temp = paginator.page(ceil(request.POST['start']/15) + 1)
     except:
         temp = paginator.page(1)
     for val in temp:
-        data[i] = val
+        data.append(val)
         i += 1
     return JsonResponse({'draw': request.POST['draw'], 'recordsTotal': count, 'recordsFiltered': count, 'data': data})
 
