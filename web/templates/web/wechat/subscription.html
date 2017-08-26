@@ -5,7 +5,8 @@
 {% block function %}
     <a class="btn btn-success" href="javascript:0;" id="X-add"><i class="fa fa-plus-square"></i>&nbsp;添加公众号</a>&nbsp;&nbsp;&nbsp;
     <a class="btn btn-success" href="javascript:0;" id="X-detail"><i class="fa fa-pencil-square"></i>&nbsp;查看详情</a>&nbsp;&nbsp;&nbsp;
-    <a class="btn btn-success" href="javascript:0;" id="X-access_token"><i class="fa fa-pencil-square"></i>&nbsp;接入</a>&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-success" href="javascript:0;" id="X-access_token"><i class="fa fa-pencil-square"></i>&nbsp;测试接入</a>&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-success" href="javascript:0;" id="X-get_all_fans"><i class="fa fa-pencil-square"></i>&nbsp;获取所有粉丝</a>&nbsp;&nbsp;&nbsp;
     <a class="btn btn-warning" href="javascript:0;" id="X-stop"><i class="fa fa-ban"></i>&nbsp;停用</a>&nbsp;&nbsp;&nbsp;
 {% endblock %}
 {% block search %}
@@ -98,7 +99,7 @@ $(function () {
             shade: false,
             maxmin: false, //开启最大化最小化按钮
             area: ['100%', '100%'],
-            content: '/web/add_page'
+            content: '/web/add_page/'
         });
     });
     //查看资讯详情
@@ -119,10 +120,19 @@ $(function () {
     });
     $('#X-access_token').on('click', function () {
         $.ajax({
-            url: '/web/get_access_token/',
+            url: '/web/get_access_token/'+tempData.id,
             type: 'GET',
-            success: function (resutl) {
-                console.log(resutl);
+            success: function (result) {
+                layer.msg(result.msg);
+            }
+        });
+    });
+    $('#X-get_all_fans').on('click', function () {
+        $.ajax({
+            url: '/web/get_all_fans/'+tempData.id,
+            type: 'GET',
+            success: function () {
+                layer.msg();
             }
         });
     });

@@ -306,5 +306,14 @@ $(function () {
         });
         $('.page-tabs-content').css("margin-left", "0");
     });
-
+    //数据中的选中表格通过添加类selected改变背景颜色
+    $('#dTable tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            $(this).siblings().removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
 });

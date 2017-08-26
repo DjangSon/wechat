@@ -6,8 +6,9 @@ from web.models import Subscription
 from django.core.paginator import Paginator
 from math import ceil
 from time import time
-from wechatInterface.models import access_token
-from tool.models import upload
+from base64 import b64decode
+from wechatInterface.models import access_token, get_all_fans
+from tool.models import upload, base64_decode
 import datetime
 # Create your views here.
 
@@ -26,7 +27,7 @@ def subscription(request):
 
 
 def add_page(request):
-    return render(request, 'web/wechat/add_page.html')
+    return render(request, 'web/wechat/page.html')
 
 
 def wechat_list(request):
@@ -46,10 +47,17 @@ def wechat_list(request):
 
 
 def add_wechat(request):
-    # try:
+    try:
         head_img = str(time()) + '_head_img.jpg'
         qrcode_img = str(time()) + '_qrcode_img.jpg'
-        return JsonResponse({'data': request.POST['head_img']})
+        data = base64_decode(request.POST['head_img'])
+        if data is False:
+            return JsonResponse({'error': 1, 'msg': '图片格式错误'})
+        upload('we-picture', head_img, b64decode(data))
+        data = base64_decode(request.POST['qrcode_img'])
+        if data is False:
+            return JsonResponse({'error': 1, 'msg': '图片格式错误'})
+        upload('we-picture', qrcode_img, base64_decode(data))
         now = datetime.datetime.now()
         wechat = Subscription(
             name=request.POST['name'], describe=request.POST['describe'], account=request.POST['account'],
@@ -59,18 +67,28 @@ def add_wechat(request):
         )
         wechat.save()
         return JsonResponse({'error': 0, 'msg': '添加成功'})
-    # except:
-    #     return JsonResponse({'error': 1, 'msg': '参数异常'})
+    except:
+        return JsonResponse({'error': 1, 'msg': '参数异常'})
 
 
-def get_access_token(request):
-    wechat = Subscription.objects.get(id=1)
-    result = access_token('123', '123')
-    wechat.access_token = result['access_token ']
-    wechat.last_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    wechat.save()
-    return JsonResponse({'error': 0, 'msg': '接入成功'})
+def get_access_token(request, wechat_id):
+    try:
+        wechat = Subscription.objects.get(id=wechat_id)
+        result = access_token(app_id=wechat.app_id, app_secret=wechat.app_secret)
+        wechat.access_token = result['access_token']
+        wechat.last_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        wechat.save()
+        return JsonResponse({'error': 0, 'msg': '接入成功'})
+    except:
+        return JsonResponse({'error': 1, 'msg': '接入失败'})
 
+
+def all_fans(request, wechat_id):
+    try:
+        access_token = Subscription.objects.get(id=wechat_id).access_token
+        # get_all_fans()
+    except:
+        return '12'
 
 def login(request):
     try:

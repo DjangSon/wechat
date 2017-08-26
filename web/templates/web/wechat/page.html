@@ -1,0 +1,141 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link href="{% static 'web/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
+{% block js %}
+    <script src="{% static 'web/js/jquery.min.js' %}"></script>
+    <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'web/js/plugins/layer/layer.min.js' %}"></script>
+    <script src="{% static 'web/js/contabs.js' %}"></script>
+    <script src="{% static 'web/js/init.js' %}"></script>
+{% endblock %}
+</head>
+<body>
+<div id="X-modal" type="modal" class="form-horizontal">
+    <br>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">公众号名称：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="name" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">公众号账号：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="account" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">公众号简介：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="describe" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">原始ID：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="origin_id" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">公众号类型：</label>
+        <div class="col-md-11">
+            <select class="form-control" id="type">
+                <option value="0">普通订阅号</option>
+                <option value="1">普通服务号</option>
+                <option value="2">认证订阅号</option>
+                <option value="3">认证服务号/认证媒体/政府订阅号</option>
+            </select>
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">Appid：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="32" class="form-control" id="app_id" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">AppSecret：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="app_secret" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">头像：</label>
+        <div class="col-md-5">
+            <input type="file" class="form-control" id="head_img" value="">
+        </div>
+        <label class="col-md-1 control-label">二维码：</label>
+        <div class="col-md-5">
+            <input type="file" class="form-control" id="qrcode_img" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">Token：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="32" class="form-control" id="token" placeholder="" value="">
+        </div>
+    </div><br/>
+    <div class="col-md-12 form-group">
+        <label class="col-md-1 control-label">EncodingAESKey：</label>
+        <div class="col-md-11">
+            <input type="text" maxlength="64" class="form-control" id="encodingaeskey" placeholder="" value="">
+        </div>
+    </div><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    <div class="layui-layer-btn">
+        <a class="layui-layer-btn0" id="save">保存</a>
+        <a class="layui-layer-btn1" id="close">取消</a>
+    </div>
+</div>
+<script>
+$(function () {
+    var head = '';
+    var qrcode = '';
+    $('#head_img').localResizeIMG({
+        success: function (result) {
+            head = result.base64;
+        }
+    });
+    $('#qrcode_img').localResizeIMG({
+        success: function (result) {
+            qrcode = result.base64;
+        }
+    });
+    $('#save').on('click', function () {
+        layer.confirm('您确认想要保存吗？', {btn: ['确定', '取消']}, function () {
+            $.ajax({
+                url: '/web/add_wechat/',
+                type: 'POST',
+                headers:{ "X-CSRFtoken":getCookie("csrftoken")},
+                data: {
+                    name: $('#name').val(), account: $('#account').val(), describe: $('#describe').val(),
+                    origin_id: $('#origin_id').val(), type: $('#type').val(), app_id: $('#app_id').val(),
+                    app_secret: $('#app_secret').val(), head_img: head, qrcode_img: qrcode,
+                    token: $('#token').val(), encodingaeskey: $('#encodingaeskey').val()
+                },
+                success: function (result) {
+                    console.log($('#name').val());
+                    if (result.error) {
+                        layer.msg(result.msg);
+                    } else {
+                        layer.msg(result.msg);
+                        layer.close();
+                    }
+
+                }
+            });
+        });
+    });
+    $('#close').on('click', function () {
+        parent.layer.closeAll();
+    });
+});
+</script>
+</body>
+</html>

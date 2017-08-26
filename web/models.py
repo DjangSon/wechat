@@ -31,7 +31,7 @@ class Subscription(models.Model):
     encodingaeskey = models.CharField(max_length=43)
     head_img = models.CharField(max_length=64)
     qrcode_img = models.CharField(max_length=64)
-    access_token = models.CharField(max_length=128, null=True)
+    access_token = models.CharField(max_length=255, null=True)
     last_date = models.DateTimeField(null=True)
     type = TinyIntField()
     status = TinyIntField(default=1)

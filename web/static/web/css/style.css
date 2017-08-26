@@ -6629,8 +6629,8 @@ table.dataTable thead .sorting {
   color: #ffffff;
 }
 .selected {
-  background-color: #a3a3a3 !important;
-  color: whitesmoke;
+  background-color: #F5F5E7 !important;
+  color: #1d84c6;
 }
 /* 表格Product Online ======================================================================== */
 .table-tree tbody tr.odd:hover td,
