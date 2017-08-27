@@ -120,7 +120,7 @@ $(function () {
     });
     $('#X-access_token').on('click', function () {
         $.ajax({
-            url: '/web/get_access_token/'+tempData.id,
+            url: '/web/access/'+tempData.id,
             type: 'GET',
             success: function (result) {
                 layer.msg(result.msg);
@@ -129,7 +129,7 @@ $(function () {
     });
     $('#X-get_all_fans').on('click', function () {
         $.ajax({
-            url: '/web/get_all_fans/'+tempData.id,
+            url: '/web/synchronize_fans/'+tempData.id,
             type: 'GET',
             success: function () {
                 layer.msg();

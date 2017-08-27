@@ -3,7 +3,7 @@ from json import loads
 header_dict = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko'}
 
 
-def access_token(app_id, app_secret):
+def get_access_token(app_id, app_secret):
     get_parameter = {'appid': app_id, 'secret': app_secret}
     get_parameter = parse.urlencode(get_parameter)
     url = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential'

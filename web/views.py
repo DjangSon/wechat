@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 from math import ceil
 from time import time
 from base64 import b64decode
-from wechatInterface.models import access_token, get_all_fans
+from wechatInterface.models import get_access_token, get_all_fans
 from tool.models import upload, base64_decode
 import datetime
 # Create your views here.
@@ -71,10 +71,10 @@ def add_wechat(request):
         return JsonResponse({'error': 1, 'msg': '参数异常'})
 
 
-def get_access_token(request, wechat_id):
+def access(request, wechat_id):
     try:
         wechat = Subscription.objects.get(id=wechat_id)
-        result = access_token(app_id=wechat.app_id, app_secret=wechat.app_secret)
+        result = get_access_token(app_id=wechat.app_id, app_secret=wechat.app_secret)
         wechat.access_token = result['access_token']
         wechat.last_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         wechat.save()
@@ -83,12 +83,13 @@ def get_access_token(request, wechat_id):
         return JsonResponse({'error': 1, 'msg': '接入失败'})
 
 
-def all_fans(request, wechat_id):
+def synchronize_fans(request, wechat_id):
     try:
         access_token = Subscription.objects.get(id=wechat_id).access_token
-        # get_all_fans()
+        return JsonResponse(get_all_fans(access_token))
     except:
         return '12'
+
 
 def login(request):
     try:
