@@ -8,6 +8,6 @@ urlpatterns = [
     url(r'^add_page/', views.add_page),
     url(r'^add_wechat/', views.add_wechat),
     url(r'^access/(\d+)', views.access),
-    url(r'^get_all_fans/(\d+)', views.synchronize_fans),
+    url(r'^synchronize_fans/(\d+)', views.synchronize_fans),
     url(r'logout/', views.logout),
 ]

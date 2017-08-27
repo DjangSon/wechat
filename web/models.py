@@ -37,3 +37,7 @@ class Subscription(models.Model):
     status = TinyIntField(default=1)
     group_id = TinyIntField(default=0)
     date_added = models.DateTimeField()
+
+
+# class WechatFans(models.Model):
+

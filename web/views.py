@@ -73,20 +73,21 @@ def add_wechat(request):
 
 def access(request, wechat_id):
     try:
-        wechat = Subscription.objects.get(id=wechat_id)
-        result = get_access_token(app_id=wechat.app_id, app_secret=wechat.app_secret)
-        wechat.access_token = result['access_token']
-        wechat.last_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        wechat.save()
-        return JsonResponse({'error': 0, 'msg': '接入成功'})
+        result = get_access_token(wechat_id=wechat_id)
+        if result:
+            return JsonResponse({'error': 0, 'msg': '接入成功'})
+        else:
+            return JsonResponse({'error': 1, 'msg': '微信公众平台系统繁忙或信息错误'})
     except:
         return JsonResponse({'error': 1, 'msg': '接入失败'})
 
 
 def synchronize_fans(request, wechat_id):
     try:
-        access_token = Subscription.objects.get(id=wechat_id).access_token
-        return JsonResponse(get_all_fans(access_token))
+        result = get_all_fans(wechat_id=wechat_id)
+        # if result.has_key('errcode') and result['errcode'] == 42001:
+
+        return JsonResponse({'data': result})
     except:
         return '12'
 

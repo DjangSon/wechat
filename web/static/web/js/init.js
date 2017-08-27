@@ -16,10 +16,9 @@ function getCookie(name) {
 
 function getData(table, objTable){
     $(table).on('click','tr',function(){
-        console.log($(this))
         if ($(this).hasClass('selected')){
             tempData = objTable.row(this).data();
-            console.log(tempData);
+            // console.log(tempData);
         } else {
             tempData = undefined;
         }

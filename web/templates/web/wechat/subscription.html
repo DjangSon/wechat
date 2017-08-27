@@ -119,22 +119,30 @@ $(function () {
         }
     });
     $('#X-access_token').on('click', function () {
-        $.ajax({
-            url: '/web/access/'+tempData.id,
-            type: 'GET',
-            success: function (result) {
-                layer.msg(result.msg);
-            }
-        });
+        if (tempData == undefined){
+            tipsSel();
+        } else {
+            $.ajax({
+                url: '/web/access/' + tempData.id,
+                type: 'GET',
+                success: function (result) {
+                    layer.msg(result.msg);
+                }
+            });
+        }
     });
     $('#X-get_all_fans').on('click', function () {
-        $.ajax({
-            url: '/web/synchronize_fans/'+tempData.id,
-            type: 'GET',
-            success: function () {
-                layer.msg();
-            }
-        });
+        if (tempData == undefined){
+            tipsSel();
+        } else {
+            $.ajax({
+                url: '/web/synchronize_fans/' + tempData.id,
+                type: 'GET',
+                success: function () {
+                    layer.msg();
+                }
+            });
+        }
     });
 });
 </script>
