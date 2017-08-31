@@ -39,5 +39,16 @@ class Subscription(models.Model):
     date_added = models.DateTimeField()
 
 
-# class WechatFans(models.Model):
+class WechatFans(models.Model):
+    nickname = models.CharField(max_length=64)
+    sex = TinyIntField()
+    language = models.CharField(max_length=16)
+    city = models.CharField(max_length=16)
+    province = models.CharField(max_length=16)
+    headimgurl = models.CharField(max_length=255)
+    subscribe_time = models.DateTimeField()
+    unionid = models.CharField(max_length=64)
+    remark = models.CharField(max_length=32)
+    groupid = TinyIntField()
+    tagid_list = models.CharField(max_length=64)
 
