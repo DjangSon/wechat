@@ -10,21 +10,24 @@
     <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
 </head>
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow: hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
+                <!-- 左侧头像开始 -->
                 <li class="nav-header">
                     <div class="dropdown profile-element">
                         <span><img alt="image" class="img-circle" height="50" width="50"
                                    src="{% static 'web/img/favicon.jpg' %}"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                                <span class="block m-t-xs"><strong class="font-bold">{{ request.session.username }}</strong></span>
-                                <span class="text-muted text-xs block">{{ request.session.username }}<b class="caret"></b></span>
-                            </span>
+									<span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold">{{ request.session.name }}</strong></span>
+									<span class="text-muted text-xs block">操作<b class="caret"></b></span>
+									</span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li>
@@ -33,9 +36,10 @@
                         </ul>
                     </div>
                 </li>
+                <!-- 左侧头像结束 -->
                 <li>
-                    <a class="J_menuItem" href="" >
-                        <i class="fa fa-bar-chart-o"></i> <span class="nav-label">全站概览</span>
+                    <a class="J_menuItem" href="<?php echo $this->getUrl('index/index/home')?>" >
+                        <i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">全站概览</span>
                     </a>
                 </li>
                 <li>
@@ -49,28 +53,28 @@
                             <a class="J_menuItem" href="/web/subscription/" data-index="0"><span class="nav-label">微信公众号</span></a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">公众号应用</a>
+                            <a class="J_menuItem" href="" data-index="0">公众号应用</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">微信开放平台</a>
+                            <a class="J_menuItem" href="" data-index="0">微信开放平台</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">微信小程序</a>
+                            <a class="J_menuItem" href="" data-index="0">微信小程序</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">小程序应用</a>
+                            <a class="J_menuItem" href="" data-index="0">小程序应用</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">我的账户</a>
+                            <a class="J_menuItem" href="" data-index="0">我的账户</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">用户管理</a>
+                            <a class="J_menuItem" href="" data-index="0">用户管理</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">应用权限组</a>
+                            <a class="J_menuItem" href="" data-index="0">应用权限组</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="#" data-index="0">用户权限组</a>
+                            <a class="J_menuItem" href="" data-index="0">用户权限组</a>
                         </li>
                     </ul>
                 </li>
@@ -80,13 +84,32 @@
             </ul>
         </div>
     </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
+{#        <div class="row border-bottom">#}
+{#            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">#}
+{#                <div class="navbar-header">#}
+{#                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>#}
+{#                    </a>#}
+{#                </div>#}
+{#                <ul class="nav navbar-top-links navbar-right">#}
+{#                    <!-- 顶部右侧小邮箱开始-->#}
+{#                    <li class="dropdown">#}
+{#                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="<?php echo $this->getUrl('user/massage/index')?>">#}
+{#                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                    <!-- 顶部右侧小邮箱结束-->#}
+{#                </ul>#}
+{#            </nav>#}
+{#        </div>#}
         <div class="row content-tabs">
             <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:0;" class="active J_menuTab" data-id="123">全站概览</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="overview.html">全站概览</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -108,7 +131,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row J_mainContent" id="content-main" style="height: 100%;">
+        <div class="row J_mainContent" id="content-main" style="height: 100%">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
                     src="" frameborder="0"
                     data-id="overview.html" seamless>
@@ -116,10 +139,12 @@
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2016-2017
-                <a href="#" target="_blank"></a>
+                <a href="#" target="_blank">Wechat</a>
             </div>
         </div>
     </div>
+    <!--右侧部分结束-->
+</div>
     <!-- 全局js -->
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
