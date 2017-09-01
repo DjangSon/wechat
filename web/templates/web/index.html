@@ -11,62 +11,72 @@
     <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
-    <nav class="navbar-default" style="background-color: #2f4050;">
-        <div class="navbar-header" >
-            <strong class="navbar-brand">We</strong>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                {% if request.session.group_id == -1 %}
-                    <li><a >公众号管理</a></li>
-                    <li><a >小程序管理</a></li>
-                    <li><a >公众号应用</a></li>
-                    <li><a >系统管理</a></li>
-                {% endif %}
-                <li><a>{{ request.session.username }}</a></li>
-                <li><a href="/web/logout/">退出登陆</a></li>
-            </ul>
-        </div>
-    </nav>
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <span><img alt="image" class="img-circle" height="50" width="50"
+                                   src="{% static 'web/img/favicon.jpg' %}"/></span>
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear">
+                                <span class="block m-t-xs"><strong class="font-bold">{{ request.session.username }}</strong></span>
+                                <span class="text-muted text-xs block">{{ request.session.username }}<b class="caret"></b></span>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li>
+                                <a href="/web/logout/">安全退出</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li>
                     <a class="J_menuItem" href="" >
-                        <i class="fa fa fa-bar-chart-o"></i> <span class="nav-label">全站概览</span>
+                        <i class="fa fa-bar-chart-o"></i> <span class="nav-label">全站概览</span>
                     </a>
                 </li>
                 <li>
-                    <a class="J_menuItem" href="/web/subscription/" data-index="0">
-                        <i class="fa fa-wechat"></i><span class="nav-label">微信公众号</span>
+                    <a href="#">
+                        <i class="fa fa-tv"></i>
+                        <span class="nav-label">系统管理</span>
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" href="/web/subscription/" data-index="0"><span class="nav-label">微信公众号</span></a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">公众号应用</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">微信开放平台</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">微信小程序</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">小程序应用</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">我的账户</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">用户管理</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">应用权限组</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" href="#" data-index="0">用户权限组</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">公众号应用</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">微信开放平台</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">微信小程序</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">小程序应用</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">我的账户</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">用户管理</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">应用权限组</a>
-                </li>
-                <li>
-                    <a class="J_menuItem" href="#" data-index="0">用户权限组</a>
-                </li>
+                <li><a >公众号管理</a></li>
+                <li><a >小程序管理</a></li>
+                <li><a >公众号应用</a></li>
             </ul>
         </div>
     </nav>
