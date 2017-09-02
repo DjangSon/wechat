@@ -17,4 +17,5 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     url(r'^web/', include('web.urls')),
+    url(r'^wechat/', include('manager.urls')),
 ]

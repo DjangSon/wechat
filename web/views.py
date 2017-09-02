@@ -15,7 +15,11 @@ import datetime
 
 def index(request):
     if request.session. has_key('username') and request.session['status'] == 1:
-        return render(request, 'web/index.html')
+        subscript = []
+        temp = Subscription.objects.all().values('name', 'id')
+        for val in temp:
+            subscript.append(val)
+        return render(request, 'web/index.html', {'subscript': subscript})
     else:
         return render(request, 'web/login.html')
 
@@ -110,7 +114,5 @@ def login(request):
 
 
 def logout(request):
-    try:
-        del request.session['username']
-    finally:
-        return redirect('/web')
+    request.session.delete(request.session.session_key)
+    return redirect('/web')
