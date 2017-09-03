@@ -9,7 +9,6 @@
     <link href="{% static 'web/css/font-awesome.css' %}" rel="stylesheet">
     <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
 {% block css %}{% endblock %}
-{% block js %}
     <script src="{% static 'web/js/jquery.min.js' %}"></script>
     <script src="{% static 'web/js/bootstrap.min.js' %}"></script>
     <script src="{% static 'web/js/plugins/slimscroll/jquery.slimscroll.min.js' %}"></script>
@@ -17,7 +16,7 @@
     <script src="{% static 'web/js/plugins/layer/layer.min.js' %}"></script>
     <script src="{% static 'web/js/contabs.js' %}"></script>
     <script src="{% static 'web/js/init.js' %}"></script>
-{% endblock %}
+{% block js %}{% endblock %}
 </head>
 <body class="gray-bg">
 {% block content %}

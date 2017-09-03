@@ -1,5 +1,97 @@
 {% extends 'web/base.html' %}
+{% load staticfiles %}
+{% block js %}
+<script src="{% static 'web/js/content.js' %}"></script>
+{% endblock %}
 {% block content %}
+<div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <div class="col-md-1" style="background-color: white"></div>
+        <div class="col-lg-2">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>功能模块</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="typography.html#" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="typography.html#">选项1</a>
+                            </li>
+                            <li><a href="typography.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content no-padding">
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <span class="badge badge-primary">16</span> 每个人都有一个死角， 自己走不出来，别人也闯不进去。
+                        </li>
+                        <li class="list-group-item ">
+                            <span class="badge badge-info">12</span> 我把最深沉的秘密放在那里。
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge badge-danger">10</span> 你不懂我，我不怪你。
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge badge-success">10</span> 每个人都有一道伤口， 或深或浅，盖上布，以为不存在。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>分组列表</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="typography.html#" aria-expanded="false">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="typography.html#">选项1</a>
+                            </li>
+                            <li><a href="typography.html#">选项2</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content no-padding">
+                    <ul class="list-group" style="text-align: center">
+                        <li class="list-group-item">
+                            <strong> 粉丝管理</strong>
+                        </li>
+                        <li class="list-group-item ">
+                            <span class="badge badge-info">12</span> 我把最深沉的秘密放在那里。
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge badge-danger">10</span> 你不懂我，我不怪你。
+                        </li>
+                        <li class="list-group-item">
+                            <span class="badge badge-success">10</span> 每个人都有一道伤口， 或深或浅，盖上布，以为不存在。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8"></div>
+        <div class="col-lg-1"></div>
+    </div>
+</div>
 {% endblock %}
 {% block script_function %}
 <script>
