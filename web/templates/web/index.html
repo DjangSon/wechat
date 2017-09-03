@@ -100,23 +100,6 @@
     <!--左侧导航结束-->
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
-                    </a>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <!-- 顶部右侧小邮箱开始-->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="<?php echo $this->getUrl('user/massage/index')?>">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                        </a>
-                    </li>
-                    <!-- 顶部右侧小邮箱结束-->
-                </ul>
-            </nav>
-        </div>
         <div class="row content-tabs">
             <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
             </button>
@@ -125,8 +108,6 @@
                     <a href="javascript:;" class="active J_menuTab" data-id="overview.html">全站概览</a>
                 </div>
             </nav>
-            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
-            </button>
             <div class="btn-group roll-nav roll-right">
                 <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
                 </button>
@@ -143,11 +124,12 @@
                     </li>
                 </ul>
             </div>
+            <a href="/web/logout/" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="" frameborder="0" data-id="" seamless></iframe>
         </div>
-        <div class="footer fixed">
+        <div class="footer">
             <div class="pull-right">&copy; 2016-2017
                 <a href="#" target="_blank">Wechat</a>
             </div>

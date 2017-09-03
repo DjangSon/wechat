@@ -1,5 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from web.models import Subscription
 
 
 def index(request):
-    return render(request, 'web/manager/index.html', {'id': request.GET['id']})
+    try:
+        subscript = Subscription.objects.get(id=request.GET['id'])
+        data = []
+        for val in subscript:
+            data.append(val)
+        return render(request, 'web/manager/index.html', {'data': data})
+    except:
+        return redirect('/web/')
