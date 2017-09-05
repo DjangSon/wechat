@@ -51,7 +51,7 @@ def wechat_list(request):
 
 
 def add_wechat(request):
-    try:
+    # try:
         head_img = str(time()) + '_head_img.jpg'
         qrcode_img = str(time()) + '_qrcode_img.jpg'
         data = base64_decode(request.POST['head_img'])
@@ -61,7 +61,7 @@ def add_wechat(request):
         data = base64_decode(request.POST['qrcode_img'])
         if data is False:
             return JsonResponse({'error': 1, 'msg': '图片格式错误'})
-        upload('we-picture', qrcode_img, base64_decode(data))
+        upload('we-picture', qrcode_img, b64decode(data))
         now = datetime.datetime.now()
         wechat = Subscription(
             name=request.POST['name'], describe=request.POST['describe'], account=request.POST['account'],
@@ -71,8 +71,8 @@ def add_wechat(request):
         )
         wechat.save()
         return JsonResponse({'error': 0, 'msg': '添加成功'})
-    except:
-        return JsonResponse({'error': 1, 'msg': '参数异常'})
+    # except:
+    #     return JsonResponse({'error': 1, 'msg': '参数异常'})
 
 
 def access(request, wechat_id):
