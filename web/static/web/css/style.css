@@ -8023,3 +8023,39 @@ table.dataTable thead .sorting {
 .img-bg {
   background: url('../img/bg.jpg');
 }
+
+.vertical-center {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 2100px;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+}
+
+.left-div {
+    padding: 26px 15px 42px;
+}
+.left-div-font {
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.left-li {
+    padding: 20px 15px;
+}
+.left-li-a {
+    color: gray;
+    padding: 21px 90px 21px 40px;
+}
+.left-li-a:hover {
+    color: #2f4050;
+}
+.left-li-a:focus {
+    color: #2F40D4;
+}
+.left-li-strong {
+    font-weight: 600;
+    margin-left: 10px;
+    font-size: 15px;
+}
