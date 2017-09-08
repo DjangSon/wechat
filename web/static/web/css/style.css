@@ -8044,6 +8044,9 @@ table.dataTable thead .sorting {
 .left-li {
     padding: 20px 15px;
 }
+li.left-li:hover {
+    color: black;
+}
 .left-li-a {
     color: gray;
     padding: 21px 90px 21px 40px;
