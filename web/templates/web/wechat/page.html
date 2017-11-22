@@ -120,7 +120,6 @@ $(function () {
                     token: $('#token').val(), encodingaeskey: $('#encodingaeskey').val()
                 },
                 success: function (result) {
-                    console.log($('#name').val());
                     if (result.error) {
                         layer.msg(result.msg);
                     } else {
